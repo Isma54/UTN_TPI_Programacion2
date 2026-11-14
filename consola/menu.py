@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import os
 from entidades.usuario import Usuario
+from entidades.producto import Producto
 from servicios.categoria_servicio import CategoriaServicio
 from servicios.pedido_servicio import PedidoServicio
 from servicios.producto_servicio import ProductoServicio
@@ -17,6 +18,11 @@ class Menu(ABC):
     @abstractmethod
     def mostrar(self)->bool:
         pass
+
+    def _mostrar_producto(self,producto:Producto)-> None:
+        categoria = self._cat_servicio.buscar_categoria_de_producto(producto)
+        nombre_categoria = categoria.nombre if categoria is not None else "Sin categoria"
+        print(f"[{nombre_categoria}] -> {producto}")
 
 def crear_menu(usuario:Usuario,cat_servicio:CategoriaServicio,ped_servicio:PedidoServicio,prod_servicio:ProductoServicio,usu_servicio:UsuarioServicio)->Menu:
     from consola.menu_administrador import MenuAdministrador

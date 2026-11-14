@@ -64,6 +64,8 @@ class Pedido(Base,Calculable):
         self.__total = total
 
     def agregar_detalle(self,cantidad:int,producto:Producto)->None:
+        if not isinstance(cantidad,int) or isinstance(cantidad,bool):
+            raise DatoInvalidoError("La cantidad debe ser un numero entero")
         if cantidad <= 0:
             raise DatoInvalidoError("La cantidad debe ser mayor a cero")
         if not isinstance(producto,Producto):
@@ -72,7 +74,7 @@ class Pedido(Base,Calculable):
             raise DatoInvalidoError(f"El producto {producto.nombre} no esta disponible")
 
         existente = self.buscar_detalle_por_producto(producto)
-        stock_necesario = cantidad + (existente.cantidad if existente else 0.0)
+        stock_necesario = cantidad + (existente.cantidad if existente else 0)
 
         if stock_necesario > producto.stock:
             raise StockInsuficienteError(f"Stock insuficiente para {producto.nombre}, stock disponible: {producto.stock}")
@@ -102,4 +104,4 @@ class Pedido(Base,Calculable):
 
     def __str__(self)->str:
         fecha_formateada = self.fecha.strftime("%d/%m/%Y")
-        return f"ID: {self.id} | Fecha: {fecha_formateada} | Usuario: {self.usuario.nombre} {self.usuario.apellido} ({self.usuario.mail}) |Estado: {self.estado.name} | Pago: {self.forma_pago.name} | Total: ${self.total:.2f}"
+        return f"ID: {self.id} | Fecha: {fecha_formateada} | Usuario: {self.usuario.nombre} {self.usuario.apellido} ({self.usuario.mail}) | Estado: {self.estado.name} | Pago: {self.forma_pago.name} | Total: ${self.total:.2f}"

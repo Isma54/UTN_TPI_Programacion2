@@ -5,10 +5,13 @@ from excepciones.food_store_error import DatoInvalidoError
 class DetallePedido(Base):
     def __init__(self,cantidad:int,producto:Producto)->None:
         super().__init__()
+        if not isinstance(producto,Producto):
+            raise DatoInvalidoError("El producto debe ser una instancia de la clase Producto")
         self.cantidad = cantidad
+        self.__producto = producto
         self.__subtotal = 0.0
-        self.__nombre_producto = producto.nombre
-        self.__precio_unitario = producto.precio
+        self.__nombre_producto : str = producto.nombre
+        self.__precio_unitario : float = producto.precio
         self.actualizar_subtotal()
 
     @property
@@ -40,5 +43,5 @@ class DetallePedido(Base):
         self.__subtotal = self.cantidad * self.precio_unitario
 
     def __str__(self)->str:
-        return f"ID: {self.id} | {self.nombre_producto} | Cantidad: {self.cantidad} | Precio unitario: ${self.precio_unitario} |Subtotal: ${self.__subtotal}"
+        return f"ID: {self.id} | {self.nombre_producto} | Cantidad: {self.cantidad} | Precio unitario: ${self.precio_unitario} | Subtotal: ${self.__subtotal}"
     

@@ -20,9 +20,6 @@ class Producto(Base):
     def descripcion(self)->str:
         return self.__descripcion
     @property
-    def imagen(self)->str:
-        return self.__imagen
-    @property
     def stock(self)->int:
         return self.__stock
     @property
@@ -69,8 +66,6 @@ class Producto(Base):
         if cantidad < 0:
             raise StockInvalidoError("El stock del producto no puede ser negativo")
         self.__stock = cantidad
-        if self.__stock == 0:
-            self.__disponible = False
 
     @disponible.setter
     def disponible(self, disponible: bool) -> None:

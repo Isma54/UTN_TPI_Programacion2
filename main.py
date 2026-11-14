@@ -16,14 +16,14 @@ def main()->None:
     usuario_servicio = UsuarioServicio()
     pedido_servicio = PedidoServicio()
 
-    usuario_servicio.crear_usuario("Ana","Perez","admin@foodstore.com","2615555555", "admin123", Rol.ADMIN)
-    usuario_servicio.crear_usuario("Juan","Gomez","cliente@foodstore.com","2614444444", "cliente123", Rol.USUARIO)
-    c1 =cat_servicio.crear_categoria("Hamburgesas","Hamburgesas completas")
-    c2 =cat_servicio.crear_categoria("Bedidas","Gaseosas, jugos naturales y aguas")
-    p1 =producto_servicio.crear_producto("Hamburgesa completa",8000,"Medallon de carne, lechuga, tomate, queso y pan de papa",15,"",True)
-    p2 =producto_servicio.crear_producto("Coca-Cola 1.5L", 4300, "Gaseosa sabor original fria",30,"",True)
-    cat_servicio.asociar_producto_a_categoria(c1.id,p1)
-    cat_servicio.asociar_producto_a_categoria(c2.id,p2)
+    administrador = usuario_servicio.crear_administrador_inicial("Ana","Perez","admin@foodstore.com","2615555555", "admin123")
+    usuario_servicio.crear_usuario("Juan","Gomez","cliente@foodstore.com","2614444444", "cliente123", Rol.USUARIO, administrador)
+    c1 =cat_servicio.crear_categoria("Hamburgesas","Hamburgesas completas", administrador)
+    c2 =cat_servicio.crear_categoria("Bedidas","Gaseosas, jugos naturales y aguas", administrador)
+    p1 =producto_servicio.crear_producto("Hamburgesa completa",8000,"Medallon de carne, lechuga, tomate, queso y pan de papa",15,"",True, administrador)
+    p2 =producto_servicio.crear_producto("Coca-Cola 1.5L", 4300, "Gaseosa fria sabor original",30,"",True, administrador)
+    cat_servicio.asociar_producto_a_categoria(c1.id,p1,administrador)
+    cat_servicio.asociar_producto_a_categoria(c2.id,p2,administrador)
 
     
     while True:
