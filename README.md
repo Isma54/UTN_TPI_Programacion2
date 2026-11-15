@@ -41,4 +41,4 @@ Para ejecutar las pruebas automatizadas:
 
 Repositorio: https://github.com/Isma54/UTN_TPI_Programacion2
 
-Video demostrativo: PENDIENTE
+Video demostrativo: https://www.youtube.com/watch?v=mDS9ClhtcSs
