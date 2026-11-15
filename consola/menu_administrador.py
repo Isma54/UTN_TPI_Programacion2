@@ -240,7 +240,7 @@ class MenuAdministrador(Menu):
                             message= "¿El producto a actualizar esta disponible?",
                             choices= ["1. Si","2. No","3. Conservar"]
                         ).ask()
-                        if disp_input is None:
+                        if disp_actualizar is None:
                             print(Fore.YELLOW + "Operacion cancelada")
                             continuar()
                             continue
