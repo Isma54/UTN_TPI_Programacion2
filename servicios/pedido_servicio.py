@@ -10,7 +10,7 @@ class PedidoServicio:
 
     def _validar_admin(self,usuario_sesion: Usuario|None) -> None:
         if usuario_sesion is not None:
-            if not isinstance(usuario_sesion,Usuario) and (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
+            if not isinstance(usuario_sesion,Usuario) or (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
                 raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")
         else:
             raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")     
@@ -96,6 +96,8 @@ class PedidoServicio:
         pedido = self.buscar_por_id(id_pedido)
         if pedido.estado in [Estado.TERMINADO,Estado.CANCELADO]:
             raise OperacionNoPermitidaError("No se puede modificar la forma de pago de un pedido ya terminado o cancelado")
+        if not isinstance(nueva_forma, FormaPago):
+            raise DatoInvalidoError("La forma de pago es invalida")
         pedido.forma_pago = nueva_forma
         return pedido
 

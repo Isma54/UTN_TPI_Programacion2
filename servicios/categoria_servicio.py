@@ -10,7 +10,7 @@ class CategoriaServicio:
 
     def _validar_admin(self,usuario_sesion: Usuario|None) -> None:
         if usuario_sesion is not None:
-            if not isinstance(usuario_sesion,Usuario) and (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
+            if not isinstance(usuario_sesion,Usuario) or (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
                 raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")
         else:
             raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")         
@@ -30,7 +30,7 @@ class CategoriaServicio:
             raise DatoInvalidoError("El nombre de la categoria debe ser una cadena de texto")
         nombre_limpio = nombre.strip().capitalize()
         for c in self.__categorias:
-            if nombre_limpio.lower() == c.nombre.lower() and not c.eliminado:
+            if nombre_limpio.lower() == c.nombre.lower():
                 raise DuplicadoError(f"Ya existe una categoria con nombre {nombre_limpio}")
         nueva_cat = Categoria(nombre_limpio,descripcion)
         self.__categorias.append(nueva_cat)

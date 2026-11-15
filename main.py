@@ -19,7 +19,7 @@ def main()->None:
     administrador = usuario_servicio.crear_administrador_inicial("Ana","Perez","admin@foodstore.com","2615555555", "admin123")
     usuario_servicio.crear_usuario("Juan","Gomez","cliente@foodstore.com","2614444444", "cliente123", Rol.USUARIO, administrador)
     c1 =cat_servicio.crear_categoria("Hamburgesas","Hamburgesas completas", administrador)
-    c2 =cat_servicio.crear_categoria("Bedidas","Gaseosas, jugos naturales y aguas", administrador)
+    c2 =cat_servicio.crear_categoria("Bebidas","Gaseosas, jugos naturales y aguas", administrador)
     p1 =producto_servicio.crear_producto("Hamburgesa completa",8000,"Medallon de carne, lechuga, tomate, queso y pan de papa",15,"",True, administrador)
     p2 =producto_servicio.crear_producto("Coca-Cola 1.5L", 4300, "Gaseosa fria sabor original",30,"",True, administrador)
     cat_servicio.asociar_producto_a_categoria(c1.id,p1,administrador)

@@ -8,7 +8,7 @@ class UsuarioServicio:
 
     def _validar_admin(self,usuario_sesion: Usuario|None) -> None:
         if usuario_sesion is not None:
-            if not isinstance(usuario_sesion,Usuario) and (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
+            if not isinstance(usuario_sesion,Usuario) or (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
                 raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")
         else:
             raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")        
@@ -48,7 +48,7 @@ class UsuarioServicio:
         mail_limpio = mail.strip().lower()
         for u in self.__usuarios:
             if mail_limpio == u.mail:
-                if u.verificar_contrasenia(contrasenia):
+                if u.verificar_contrasenia(contrasenia) and not u.eliminado:
                     return u
         raise CredencialesInvalidasError("Mail o contraseña incorrectos")
 

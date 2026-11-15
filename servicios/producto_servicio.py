@@ -9,7 +9,7 @@ class ProductoServicio:
 
     def _validar_admin(self,usuario_sesion: Usuario|None) -> None:
         if usuario_sesion is not None:
-            if not isinstance(usuario_sesion,Usuario) and (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
+            if not isinstance(usuario_sesion,Usuario) or (usuario_sesion.eliminado or usuario_sesion.rol != Rol.ADMIN):
                 raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")
         else:
             raise OperacionNoPermitidaError("Solo un administrador puede realizar esta operacion")        
@@ -61,15 +61,15 @@ class ProductoServicio:
         if disponible is not None and not isinstance(disponible, bool):
             raise DatoInvalidoError("La disponibilidad debe ser un booleano")        
         if nombre is not None:
-            producto.nombre = nombre
+            producto.nombre = nombre.strip()
         if precio is not None:
             producto.precio = precio
         if descripcion is not None:
-            producto.descripcion = descripcion
+            producto.descripcion = descripcion.strip()
         if stock is not None:
             producto.stock = stock
         if imagen is not None:
-            producto.imagen = imagen
+            producto.imagen = imagen.strip()
         if disponible is not None:
             producto.disponible = disponible
         return producto
@@ -77,5 +77,4 @@ class ProductoServicio:
     def eliminar(self,id_producto:int,usuario_sesion: Usuario|None = None)->None:
         self._validar_admin(usuario_sesion)
         producto = self.buscar_por_id(id_producto)
-        if producto:
-            producto.eliminar()
+        producto.eliminar()
