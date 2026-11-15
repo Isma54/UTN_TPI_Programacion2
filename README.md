@@ -38,8 +38,8 @@ Desde el archivo ejecutable:
 - `entidades/`: Capa que contiene el modelo del dominio y sus validaciones
 - `servicios/`: Capa encargada de las reglas de negocio y manipulación de las colecciones
 - `consola/`: Capa que contiene los menús interactivos para el administrador y el cliente
-- `enums`: Capa que contiene los roles, estados y formas de pago
-- `excepciones`: Capa que contiene las excepciones del dominio
+- `enums/`: Capa que contiene los roles, estados y formas de pago
+- `excepciones/`: Capa que contiene las excepciones del dominio
 - `main.py`: Ejecuta el inicio de sesión además de los respectivos menús
 - `pruebas.py`: Ejecuta los test automáticos, valida cálculos, stock y la correcta captura de excepciones
 
