@@ -22,6 +22,10 @@ Para ejecutar las pruebas automatizadas:
 
 `python pruebas.py`
 
+Desde el archivo ejecutable:
+
+`FoodStore.exe`
+
 ## Credenciales de acceso
 
 ´main.py´ carga estos usuarios al iniciar su ejecucion:
